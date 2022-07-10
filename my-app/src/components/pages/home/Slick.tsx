@@ -19,7 +19,7 @@ function Slick(){
         <div className='w-1/2 bg-blue-200 m-auto text-center p-10 '>
           <h2 className='text-xl p-5'> Popular Products</h2>
           <Slider {...settings}>
-           {
+            {
                 cardContents.current.map((item)=>(<SlickCard ProductName={item.name} ProductPrice={item.price} ProductImage={item.image}/>))
             }
           </Slider>
