@@ -1,12 +1,12 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit"
 
-interface productChildType{
-    completed:boolean,
+type productChildType = {
+    url:string,
     id:number,
-    title:string,
-    userId:number
+    name:string,
+    price:number,
+    starPoint:number
 }
-
 
 
 interface initialStateType{
@@ -17,22 +17,28 @@ interface initialStateType{
 const initialState : initialStateType = {listCount:0,list:[]}
 
 
-export const counterSlice = createSlice({
+export const productSlice = createSlice({
     name:"product",
     initialState:initialState,
     reducers:{
         populateList:(state:initialStateType,action)=>{
-           return {...state,list:action.payload}
+           return {...state,list:[...action.payload]}
         },
-        incrementListCount:(state:initialStateType,action)=>{    
-            return {...state,listCount:state.listCount+1}
+        deleteFromList:(state,action)=>{
+            const copyProducts = [...state.list];
+            copyProducts.splice(action.payload,1)
+            return {...state,list:copyProducts}
         },
-        removeFromList:(state:initialStateType)=>{
+        incrementListCount:(state:initialStateType,action)=>{  
+            console.log(action)
+            return {...state,listCount:state.listCount+action.payload}
+        },
+        decrementListCount:(state:initialStateType)=>{
            return {...state,listCount:state.listCount-1}
         }
     }
 })
 
 
-export const actions = counterSlice.actions;
-export default counterSlice.reducer;
+export const {incrementListCount,populateList,decrementListCount,deleteFromList} = productSlice.actions;
+export default productSlice.reducer;

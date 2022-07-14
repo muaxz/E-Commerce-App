@@ -1,34 +1,48 @@
-import React,{useEffect,useRef} from 'react';
+import React,{useEffect,useRef, useState} from 'react';
 import axios from "axios"
 import {useSelector,useDispatch} from "react-redux"
-import {actions} from "../state/slices/product"
+import {populateList} from "../state/slices/product"
+import {useMutation, useQuery} from "@apollo/client"
+import {getUserProducts} from "../GraphQL/Queries"
+import ProductList from "../components/shared/productList";
+import { RootState } from '../state/store';
 
 
 function DisplayCart(){
 
     const preventDouble = useRef(true)
     const dispatch = useDispatch()
+    const {data,error,loading} = useQuery(getUserProducts,{variables:{userId:localStorage.getItem("sessionId")}})
+    const products = useSelector((state:RootState)=>state.product.list)
+    const [currentCount,setCurrentCount] = useState(0)
+
+    useEffect(()=>{
+        
+        if(data){
+           
+            dispatch(populateList(data.getUserProducts.Products))
+    
+        }
+
+    },[data])
+
 
     useEffect(()=>{
 
-        if(preventDouble.current) getCartProducts()
+        const productCount = products.reduce((previousValue,currentValue)=>{
+            return previousValue+currentValue.price
+        },0)
         
-        return ()=>{
-            preventDouble.current = false
-        }
+        setCurrentCount(productCount)
 
-    },[])
-
-    async function getCartProducts(){
-
-        const list = await axios.get('https://jsonplaceholder.typicode.com/todos')
-        dispatch(actions.populateList(list.data.splice(0,10)))
-
-    }
+    },[products])
 
     return (
-        <div>
-            in display cart
+        <div className='pt-40'>
+          <div className="text-xl pl-44">
+            Total Amount ({currentCount}$) ({products.length})
+          </div>
+          <ProductList buttonAction="Delete" list={products} loading={loading}></ProductList>
         </div>
     )
 
