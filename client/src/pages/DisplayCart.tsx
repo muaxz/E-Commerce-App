@@ -14,14 +14,15 @@ function DisplayCart(){
     const dispatch = useDispatch()
     const {data,error,loading} = useQuery(getUserProducts,{variables:{userId:localStorage.getItem("sessionId")}})
     const products = useSelector((state:RootState)=>state.product.list)
-    const [currentCount,setCurrentCount] = useState(0)
+    const [currentCount,setCurrentCount] = useState<number>(0)
+    const [loading2,setLoading2] = useState<boolean>(true)
 
     useEffect(()=>{
         
         if(data){
            
             dispatch(populateList(data.getUserProducts.Products))
-    
+            setLoading2(false)
         }
 
     },[data])
@@ -42,7 +43,7 @@ function DisplayCart(){
           <div className="text-xl pl-44">
             Total Amount ({currentCount}$) ({products.length})
           </div>
-          <ProductList buttonAction="Delete" list={products} loading={loading}></ProductList>
+          <ProductList buttonAction="Delete" list={products} loading={loading2}></ProductList>
         </div>
     )
 

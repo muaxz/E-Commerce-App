@@ -3,6 +3,7 @@ import {BrowserRouter,Route,Routes} from "react-router-dom"
 import HomePage from "./pages/Home"
 import CartPage from "./pages/DisplayCart"
 import Layout from "./layout/layout"
+import ProductPage from "./pages/Product"
 import './App.css';
 import {ApolloClient,ApolloProvider,InMemoryCache,HttpLink,from, DefaultOptions} from "@apollo/client"
 import {onError} from "@apollo/client/link/error"
@@ -44,6 +45,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage/>}/>
                 <Route path="/cart" element={<CartPage/>}/>
+                <Route path="/product/:id" element={<ProductPage/>}></Route>
             </Routes>
           </ApolloProvider>
         </BrowserRouter>
