@@ -22,7 +22,7 @@ function NavigationBar(){
   },[data])
 
   return (
-    <div className='w-full fixed pr-10 pl-10 bg-red-200 mb-10 h-20 flex items-center justify-center z-40'>
+    <div className='w-full fixed pr-10 pl-10 bg-slate-200 mb-10 h-20 flex items-center justify-center z-40'>
       <div className="w-full  flex justify-between">
         <Link to={"/"}>
            <h1 className='text-2xl'>Navigation Part</h1>

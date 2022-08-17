@@ -56,7 +56,7 @@ export default function ProductCard(props:Props){
     }
   
     return(
-        <div className="flex w-100  p-10 flex-wrap justify-center z-10">
+        <div className="flex w-100  flex-wrap justify-center z-10">
                 <div className="w-64 mr-10 mb-10 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
                         <img className="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />

@@ -1,5 +1,6 @@
 const User = require("../Models/user")
 const Product = require("../Models/product")
+const Comment = require("../Models/comment")
 const UserProduct = require("../Models/userProduct")
 const {v4} = require("uuid")
 
@@ -7,13 +8,12 @@ const {v4} = require("uuid")
 const resolvers = {
     Query : {
         async getAllProducts(parent,args,context,info){
-            // phase to go to db
+
             const allProducts = await Product.findAll();
 
             return allProducts
         },
         async getUserProducts(parent,args,context,info){
-            // phase to go to db
            
             const allProducts = await User.findOne({
                 where:{
@@ -25,6 +25,19 @@ const resolvers = {
             });
 
             return allProducts
+        },
+        async getProduct(parent,args,context,info){
+
+            const ProductSingle = await Product.findOne({
+                where:{
+                    id:args.productId
+                },
+                include:{
+                    model:Comment
+                }
+            });
+            
+            return ProductSingle
         },
         async getCartCount(parent,args,context,info){
             

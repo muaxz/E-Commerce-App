@@ -34,3 +34,20 @@ export const getCartCount = gql`
         }
     }
 `
+
+export const getSingleProduct = gql`
+    query GetSingleProduct($productId:Int!){
+         getProduct(productId:$productId){
+            id
+            name
+            price
+            starPoint
+            url
+            Comments{
+                id
+                message
+            }
+         }
+    }
+
+`

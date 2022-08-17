@@ -10,11 +10,17 @@ const typeDefs = gql`
      state: String!
      userId: String!
   }
+
+  type Comment{
+    id:Int!
+    message:String!
+  }
   
   type User {
      id: String!
      Products:[Product!]!
   }
+
 
   type Product {
      id: Int!
@@ -22,12 +28,14 @@ const typeDefs = gql`
      name : String!
      starPoint: Int!
      url: String!
+     Comments:[Comment!]!
   }
 
   type Query {
      getAllProducts : [Product!]!
      getUserProducts(userId:String!) : User!
      getCartCount(userId:String!) : Count!
+     getProduct(productId:Int!) : Product!
   }
 
   type Mutation {

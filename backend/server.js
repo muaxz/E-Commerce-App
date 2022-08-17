@@ -8,6 +8,7 @@ const User = require("./Models/user")
 const userProduct = require("./Models/userProduct")
 const DB = require("./DataBase/connection")
 const app = express()
+const Comment = require("./Models/comment")
 const cors = require("cors")
 const port = 3001
 
