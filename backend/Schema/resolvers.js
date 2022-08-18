@@ -2,6 +2,7 @@ const User = require("../Models/user")
 const Product = require("../Models/product")
 const Comment = require("../Models/comment")
 const UserProduct = require("../Models/userProduct")
+const db = require("../DataBase/connection")
 const {v4} = require("uuid")
 
 
@@ -19,6 +20,7 @@ const resolvers = {
                 where:{
                     id:args.userId
                 },
+                order:[Comment,"createdAt","DESC"],
                 include:{
                     model:Product,
                 }
@@ -31,12 +33,18 @@ const resolvers = {
             const ProductSingle = await Product.findOne({
                 where:{
                     id:args.productId
-                },
-                include:{
-                    model:Comment
                 }
             });
+
+            const Comments = await Comment.findAll({
+                where:{
+                    ProductId:args.productId
+                },
+                order:[["createdAt","DESC"]]
+            })
             
+            ProductSingle.Comments = Comments
+        
             return ProductSingle
         },
         async getCartCount(parent,args,context,info){
@@ -93,6 +101,16 @@ const resolvers = {
             })
 
             return {state:"success",userId:""}
+        }, 
+        async createComment(parent,args,context,info){
+
+            const commentObject = await Comment.create({
+                message:args.message,
+                ProductId:args.productId,
+                star:args.star
+            })
+
+            return commentObject
         }
     }
 }

@@ -11,7 +11,9 @@ const Comment = sequelize.define("Comment",{
     message:{
         type:Sequelize.TEXT,
     },
-
+    star:{
+        type:Sequelize.INTEGER
+    }
 })
 
 Comment.belongsTo(Product)

@@ -26,3 +26,13 @@ export const deleteProductFromCart = gql`
         }
     }
 `
+
+export const produceComment = gql`
+    mutation CreateComment($message:String! $productId:Int! $star:Int!){
+        createComment(message:$message productId:$productId star:$star){
+            id
+            message
+            star
+        }
+    }
+`

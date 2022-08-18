@@ -46,6 +46,7 @@ export const getSingleProduct = gql`
             Comments{
                 id
                 message
+                star
             }
          }
     }

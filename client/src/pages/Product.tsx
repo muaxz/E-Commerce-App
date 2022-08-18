@@ -1,9 +1,11 @@
-import React, { useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import {useDispatch,useSelector} from "react-redux"
 import {useNavigate,useParams} from "react-router-dom"
 import {useQuery,useMutation} from "@apollo/client"
 import {getSingleProduct} from "../GraphQL/Queries"
 import {addProductToCart} from "../GraphQL/Mutations"
+import {RootState} from "../state/store"
+import {addToList,populateList} from "../state/slices/comment"
 import CommentSection from "../components/pages/Product/comment_section"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar ,faAngleDown, faCartPlus} from '@fortawesome/free-solid-svg-icons';
@@ -15,16 +17,23 @@ interface productType{
 
 export default function Product(){
     const [isDetailOpen,setIsDetailOpen] = useState(true)
+    const comments = useSelector((state:RootState)=>state.comment)
+    const dispatch = useDispatch()
     //const [addToCart,{error,data}] = useMutation(addProductToCart)
     const {id} = useParams()
     const paramId: string = id !== undefined ? id : '';
-    const {error,loading,data} = useQuery(getSingleProduct,{variables:{productId:parseInt(paramId)}})
-
-      
+    const {error,loading,data }  = useQuery(getSingleProduct,{variables:{productId:parseInt(paramId)}})
 
     var productDetail = "Model Number: M232-Orange;Item Shape:Round;Band Material:Leather;Band Colour:Orange;Band Material:Leather;Dial Colour:Blue"
     var splittedDetail = productDetail.split(";")
-    
+
+    useEffect(()=>{
+
+        if(data){
+            dispatch(populateList(data.getProduct.Comments))
+        }
+
+    },[data])
     
     const addToCartHandler=async ()=>{
         /*
@@ -73,7 +82,7 @@ export default function Product(){
                     </div>
                 </div>         
             </div>
-            <CommentSection loading={loading} ></CommentSection>
+            <CommentSection></CommentSection>
           </div>)}
         </>
     )

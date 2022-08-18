@@ -14,6 +14,7 @@ const typeDefs = gql`
   type Comment{
     id:Int!
     message:String!
+    star:Int!
   }
   
   type User {
@@ -42,7 +43,7 @@ const typeDefs = gql`
      createNewUser(userId:String!) : Result!
      deleteFromCart(userId:String! productId:Int!) : Result!
      addToCart(userId:String! productId:Int!) : Result!
-     
+     createComment(message:String! productId:Int! star:Int!) : Comment!
   }
 
 ` 

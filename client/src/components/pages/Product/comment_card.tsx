@@ -1,19 +1,32 @@
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
-export default function CommentCard (){
+interface Props{
+message:string,
+starPoint:number
+}
+
+export default function CommentCard (props:Props){
 
     return(
-
         <div className="w-640 bg-slate-200 mb-10 relative max-w-2xl rounded-md">
             <div className="absolute rounded-full w-16 h-16 -left-20  border-2 border-solid border-grey ">
                 <img className="rounded-full" src="/bubble.png" alt="" />
             </div>
             <div className="h-36">
-                <div className='text-right text-slate-600 p-2'>
-                    4 minutes ago
+                <div className='text-slate-600 p-2 flex justify-between'>
+                    <div>
+                        {[0,0,0,0,0].map((item,index)=>(
+                                <FontAwesomeIcon  color={index < props.starPoint ? "#e76f51" : "lightgrey"} icon={faStar}></FontAwesomeIcon>
+                        ))}
+                    </div>
+                    <p>
+                      4 minutes ago
+                    </p>
                 </div>
                 <div className="p-5">
-                     This product is very usefuly for regular usages
+                     {props.message}
                 </div>
             </div>
         </div>
