@@ -6,7 +6,7 @@ import {Link} from "react-router-dom"
 import {incrementListCount,decrementListCount,deleteFromList} from "../../state/slices/product"
 import {addProductToCart,quantityChange,deleteProductFromCart} from "../../GraphQL/Mutations"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faStar,faCartPlus, faAngleUp, faAngleDown,faTrash,faUpRightFromSquare} from "@fortawesome/free-solid-svg-icons"
+import {faStar,faCartPlus, faAngleUp, faAngleDown,faTrash,faSearch} from "@fortawesome/free-solid-svg-icons"
 
 
 interface productFields{
@@ -35,8 +35,8 @@ export default function ProductCard(props:Props){
 
     const sessionId = localStorage.getItem("sessionId")
     
-    var iconStyling = props.actionButton === "Delete" ? "flex top-0 right-0 w-8 h-8" : "hidden  w-16 h-16 top-28 right-24 top-28 right-24";
-
+    var iconStyling = props.actionButton === "Delete" ? "flex bottom-10 right-16 w-8 h-8" : "hidden  w-16 h-16 top-36 right-24 top-40 right-24";
+    var icondDirectionStyling = props.actionButton === "Delete" ? "flex bottom-10 right-28 w-8 h-8" : "hidden  w-16 h-16 top-16 right-24 top-28 right-24";
     useEffect(()=>{
 
         if(productQuantity !== 0 && props.actionButton === "Delete"){
@@ -95,14 +95,14 @@ export default function ProductCard(props:Props){
                 <div className="w-64 mr-10 mb-10 max-w-sm bg-white rounded-lg border relative border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <div className='group'>
                         <div className={`absolute  duration-200 ${props.actionButton === "Delete" ? "hidden" : "block"} group-hover:opacity-70 w-full h-full z-10 bg-slate-700 opacity-0`}></div>
-                        <div onClick={submitToCart} className={`cursor-pointer ${iconStyling} group-hover:flex  rounded absolute top-36 z-20 bg-red-400 flex justify-center items-center`}>
+                        <div onClick={submitToCart} className={`cursor-pointer ${iconStyling} group-hover:flex  rounded absolute  z-20 bg-red-400 flex justify-center items-center`}>
                             {props.actionButton !== "Delete" ? <FontAwesomeIcon size="2x" icon={faCartPlus}></FontAwesomeIcon> : 
                                 (<FontAwesomeIcon size={props.actionButton === "Delete" ? "1x" : "2x"} icon={faTrash}></FontAwesomeIcon>)
                             }   
                         </div>
                         <Link to={`/product/${props.product.id}`}>
-                            <div className={`cursor-pointer ${iconStyling} group-hover:flex top-16 rounded absolute  z-20 bg-red-400 flex justify-center items-center`}>
-                                <FontAwesomeIcon size="2x" icon={faUpRightFromSquare}></FontAwesomeIcon> : 
+                            <div className={`cursor-pointer ${icondDirectionStyling} group-hover:flex rounded absolute  z-20 bg-red-400 flex justify-center items-center`}>
+                                <FontAwesomeIcon size={props.actionButton === "Delete" ? "1x" : "2x"} icon={faSearch}></FontAwesomeIcon> 
                             </div>
                         </Link>
                     </div>
