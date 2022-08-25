@@ -19,8 +19,7 @@ const Product = sequelize.define("Product",{
     },
     url:{
         type:Sequelize.TEXT,
-    }
-
+    },
 })
 
 

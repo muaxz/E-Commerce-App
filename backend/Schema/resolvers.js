@@ -2,15 +2,28 @@ const User = require("../Models/user")
 const Product = require("../Models/product")
 const Comment = require("../Models/comment")
 const UserProduct = require("../Models/userProduct")
+const Category = require("../Models/category")
 const db = require("../DataBase/connection")
+const {Op} = require("sequelize")
 const {v4} = require("uuid")
 
 
 const resolvers = {
     Query : {
+        
         async getAllProducts(parent,args,context,info){
+            
+            var allProducts = []
+            if(args.categoryId === 90){
+                allProducts = await Product.findAll()
+                return allProducts;
+            }
 
-            const allProducts = await Product.findAll();
+            allProducts = await Product.findAll({
+                where:{
+                    CategoryId:args.categoryId   
+                }
+            });
 
             return allProducts
         },
@@ -20,13 +33,15 @@ const resolvers = {
                 where:{
                     id:args.userId
                 },
-                order:[Comment,"createdAt","DESC"],
                 include:{
                     model:Product,
+                    through:{
+                        attributes:["quantity"]
+                    }
                 }
             });
 
-            return allProducts
+            return allProducts.toJSON()
         },
         async getProduct(parent,args,context,info){
 
@@ -56,6 +71,18 @@ const resolvers = {
             })
 
             return {count:count}
+        },
+        async searchProduct(parent,args,context,info){
+
+            const categories = await Category.findAll({
+                where:{
+                    name:{
+                        [Op.startsWith]:args.searchValue
+                    }
+                }
+            })
+
+            return categories
         }
 
     },
@@ -78,10 +105,28 @@ const resolvers = {
             
             try {
 
-                await UserProduct.create({
-                    UserId:args.userId,
-                    ProductId:args.productId
+                const isProductAvailable = await UserProduct.findOne({
+                    where:{
+                        UserId:args.userId,
+                        ProductId:args.productId
+                    }
                 })
+             
+                if(!isProductAvailable){
+                    
+                    await UserProduct.create({
+                        UserId:args.userId,
+                        ProductId:args.productId
+                    })
+
+                }else{
+
+                    await UserProduct.update({
+                        quantity:isProductAvailable.quantity + 1
+                    },{where:{UserId:args.userId,ProductId:args.productId}})
+
+                }
+
 
             } catch (error) {
 
@@ -111,7 +156,25 @@ const resolvers = {
             })
 
             return commentObject
-        }
+        },
+        async changeQuantity(parent,args,context,info){
+          
+            try {
+
+                await UserProduct.update({
+                    quantity:args.quantity
+                },{where:{UserId:args.userId,ProductId:args.productId,}})
+    
+                return {state:"success"}
+
+            } catch (error) {
+
+                return {state:"error"}
+
+            }
+          
+        },
+
     }
 }
 

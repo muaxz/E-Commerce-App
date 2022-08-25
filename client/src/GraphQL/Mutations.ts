@@ -36,3 +36,11 @@ export const produceComment = gql`
         }
     }
 `
+
+export const quantityChange = gql`
+    mutation ChangeQuantity($userId:String! $quantity:Int! $productId:Int!){
+        changeQuantity(userId:$userId productId:$productId quantity:$quantity){
+            state
+        }
+    }
+`

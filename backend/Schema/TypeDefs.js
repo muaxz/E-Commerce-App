@@ -5,11 +5,21 @@ const typeDefs = gql`
   type Count{
       count:Int!   
   }
-
-  type Result{
+  
+  type ResponseState{
      state: String!
      userId: String!
   }
+
+  type Category{
+      name:String!
+      id:Int!
+  }
+
+  type UserProduct{
+     quantity:Int!
+  }
+
 
   type Comment{
     id:Int!
@@ -30,20 +40,23 @@ const typeDefs = gql`
      starPoint: Int!
      url: String!
      Comments:[Comment!]!
+     userProduct:UserProduct!
   }
 
   type Query {
-     getAllProducts : [Product!]!
+     getAllProducts(categoryId:Int!) : [Product!]!
      getUserProducts(userId:String!) : User!
      getCartCount(userId:String!) : Count!
      getProduct(productId:Int!) : Product!
+     searchProduct(searchValue:String!) : [Category!]!
   }
 
   type Mutation {
-     createNewUser(userId:String!) : Result!
-     deleteFromCart(userId:String! productId:Int!) : Result!
-     addToCart(userId:String! productId:Int!) : Result!
+     createNewUser(userId:String!) : ResponseState!
+     deleteFromCart(userId:String! productId:Int!) : ResponseState!
+     addToCart(userId:String! productId:Int!) : ResponseState!
      createComment(message:String! productId:Int! star:Int!) : Comment!
+     changeQuantity(userId:String! productId:Int! quantity:Int!) : ResponseState!
   }
 
 ` 

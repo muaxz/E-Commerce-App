@@ -12,14 +12,13 @@ function Slick(){
         dots: true,
         infinite: false,
         speed: 500,
-        slidesToShow: 4,
+        slidesToShow: 3,
         slidesToScroll:1,
-    
     };
 
     return (
-        <div className='w-3/4 bg-red-400 m-auto mb-20 p-10 rounded'>
-          <h2 className='text-xl p-5 text-center'> <span className="text-slate-50 rounded-md">Trend Products Of The Month</span></h2>
+        <div className='w-3/4 m-auto mb-20 p-10 rounded'>
+          <h2 className='text-xl p-5 text-center'> <span className="text-slate-50 rounded-md text-black">Trend Products</span></h2>
           <Slider {...settings}>
             {
                 cardContents.current.map((item,index)=>(<ProductCard index={index} actionButton={"Add To Cart"} product={{starPoint:3,price:item.price,name:item.name,url:item.image,id:1}}/>))

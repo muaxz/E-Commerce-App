@@ -31,7 +31,8 @@ function DisplayCart(){
     useEffect(()=>{
 
         const productCount = products.reduce((previousValue,currentValue)=>{
-            return previousValue+currentValue.price
+            const typeGuard = currentValue.userProduct == undefined ? 1 : currentValue.userProduct.quantity
+            return previousValue+(currentValue.price*typeGuard)
         },0)
         
         setCurrentCount(productCount)
@@ -41,7 +42,7 @@ function DisplayCart(){
     return (
         <div className='pt-40'>
           <div className="text-xl pl-44">
-            Total Amount ({currentCount}$) ({products.length})
+            Total Amount ({currentCount}$) <br></br> Total Item ({products.length})
           </div>
           <ProductList buttonAction="Delete" list={products} loading={loading2}></ProductList>
         </div>

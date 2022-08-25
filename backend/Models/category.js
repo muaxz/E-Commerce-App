@@ -1,22 +1,19 @@
 const sequelize = require("../DataBase/connection")
 const Sequelize = require("sequelize")
+const Product = require("../Models/product")
 
-const UserProduct = sequelize.define("userProduct",{
+const Category = sequelize.define("category",{
     id:{
         primaryKey:true,
         autoIncrement:true,
         type:Sequelize.INTEGER
     },
-    UserId:{
+    name:{
         type:Sequelize.STRING
-    },
-    ProductId:{
-        type:Sequelize.INTEGER
-    },
-    quantity:{
-        type:Sequelize.INTEGER
     }
-},{freezeTableName:true})
+})
 
+Category.hasMany(Product)
+Product.belongsTo(Category)
 
-module.exports = UserProduct
+module.exports = Category

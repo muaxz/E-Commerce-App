@@ -5,6 +5,7 @@ import {createUser} from "../GraphQL/Mutations"
 import {useSelector,useDispatch} from "react-redux"
 import NotifyWindow from "../components/helper/NotifyWindow"
 import {RootState} from "../state/store"
+import ScrollUpButton from "../components/helper/scrollUpButton"
  
 interface props{
   children?:JSX.Element
@@ -50,6 +51,7 @@ const Layout : React.FC<props> = function(props){
         <>
           <NavBar></NavBar>
           <NotifyWindow isActive={isActive} actionType="confirm">You Successfully added the product to cart</NotifyWindow>
+          <ScrollUpButton></ScrollUpButton>
         </>
     )
 }

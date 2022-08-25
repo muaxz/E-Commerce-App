@@ -5,7 +5,8 @@ type productChildType = {
     id:number,
     name:string,
     price:number,
-    starPoint:number
+    starPoint:number,
+    userProduct:{quantity:number}
 }
 
 

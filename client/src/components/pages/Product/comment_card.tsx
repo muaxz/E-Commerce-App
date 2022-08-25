@@ -10,7 +10,7 @@ starPoint:number
 export default function CommentCard (props:Props){
 
     return(
-        <div className="w-640 bg-slate-200 mb-10 relative max-w-2xl rounded-md">
+        <div style={{boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",backgroundColor:"#eef0f2"}} className="w-640 mb-10 relative max-w-2xl rounded-md">
             <div className="absolute rounded-full w-16 h-16 -left-20  border-2 border-solid border-grey ">
                 <img className="rounded-full" src="/bubble.png" alt="" />
             </div>
