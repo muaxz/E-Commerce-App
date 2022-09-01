@@ -2,8 +2,8 @@ import {gql} from "@apollo/client"
 
 
 export const loadProducts = gql`
-    query GetAllProducts($categoryId:Int!){
-        getAllProducts(categoryId:$categoryId){
+    query GetAllProducts($categoryId:Int! $offset:Int!){
+        getAllProducts(categoryId:$categoryId offset:$offset){
             id
             name
             price

@@ -18,7 +18,6 @@ interface Props{
 
 export default function ProductList ({list,loading,addToCartFunc}: Props){
     
-    
     return(
     
         <div className="flex w-100  p-10 flex-wrap justify-center">

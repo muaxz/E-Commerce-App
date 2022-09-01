@@ -6,7 +6,7 @@ type productChildType = {
     name:string,
     price:number,
     starPoint:number,
-    userProduct:{quantity:number}
+    userProduct?:{quantity:number}
 }
 
 
@@ -23,7 +23,11 @@ export const productSlice = createSlice({
     initialState:initialState,
     reducers:{
         populateList:(state:initialStateType,action)=>{
-           return {...state,list:[...action.payload]}
+           if(action.payload.isPaignation){
+             return {...state,list:[...state.list,...action.payload.list]}
+           }
+           
+           return {...state,list:[...action.payload.list]}
         },
         deleteFromList:(state,action)=>{
             const copyProducts = [...state.list];

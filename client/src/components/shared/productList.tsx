@@ -9,7 +9,7 @@ name:string,
 price:number,
 starPoint:number,
 url:string,
-userProduct:{quantity:number}
+userProduct?:{quantity:number}
 }
 
 interface Props{

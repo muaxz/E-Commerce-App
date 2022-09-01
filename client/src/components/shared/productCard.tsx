@@ -16,6 +16,7 @@ interface productFields{
     starPoint:number,
     url:string,
     quantity?:number,
+    detail?:string
 }
 
 interface Props{
@@ -35,8 +36,8 @@ export default function ProductCard(props:Props){
 
     const sessionId = localStorage.getItem("sessionId")
     
-    var iconStyling = props.actionButton === "Delete" ? "flex bottom-10 right-16 w-8 h-8" : "hidden  w-16 h-16 top-36 right-24 top-40 right-24";
-    var icondDirectionStyling = props.actionButton === "Delete" ? "flex bottom-10 right-28 w-8 h-8" : "hidden  w-16 h-16 top-16 right-24 top-28 right-24";
+    var iconStyling = props.actionButton === "Delete" ? "flex bottom-10 right-16 w-8 h-8" : "hidden  w-16 h-16 top-16 right-24 top-40 right-24";
+    var icondDirectionStyling = props.actionButton === "Delete" ? "flex bottom-10 right-28 w-8 h-8" : "hidden  w-16 h-16  right-24 top-40 right-24";
     useEffect(()=>{
 
         if(productQuantity !== 0 && props.actionButton === "Delete"){
@@ -112,6 +113,7 @@ export default function ProductCard(props:Props){
                         </div>
                         <a href="#">
                             <h5 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{props.product.name}</h5>
+                            <p>{props.product.detail}</p>
                         </a>
                         {
                             props.actionButton === "Delete" && 

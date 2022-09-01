@@ -14,15 +14,23 @@ const resolvers = {
         async getAllProducts(parent,args,context,info){
             
             var allProducts = []
+           
             if(args.categoryId === 90){
-                allProducts = await Product.findAll()
+
+                allProducts = await Product.findAll({
+                    limit:8,
+                    offset:args.offset
+                })
                 return allProducts;
+
             }
 
             allProducts = await Product.findAll({
                 where:{
                     CategoryId:args.categoryId   
-                }
+                },
+                limit:10,
+                offset:args.offset
             });
 
             return allProducts

@@ -10,7 +10,6 @@ const User = sequelize.define("user",{
     }
 })
 
-
 User.belongsToMany(Product,{through:"userProduct"})
 Product.belongsToMany(User,{through:"userProduct"})
 

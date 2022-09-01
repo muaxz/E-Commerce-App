@@ -44,7 +44,7 @@ const typeDefs = gql`
   }
 
   type Query {
-     getAllProducts(categoryId:Int!) : [Product!]!
+     getAllProducts(categoryId:Int! offset:Int!) : [Product!]!
      getUserProducts(userId:String!) : User!
      getCartCount(userId:String!) : Count!
      getProduct(productId:Int!) : Product!

@@ -21,7 +21,7 @@ function DisplayCart(){
         
         if(data){
            
-            dispatch(populateList(data.getUserProducts.Products))
+            dispatch(populateList({list:data.getUserProducts.Products,isPaignation:false}))
             setLoading2(false)
         }
 
