@@ -17,7 +17,10 @@ export default function CommentSection(){
     const dispatch = useDispatch();
     const [createComment,{error,data}] = useMutation(produceComment)
     const params = useParams()
-    const [commentMessage,setCommentMessage] = useState<string>("")
+    const [commentMessage,setCommentMessage] = useState<{value:string,error:boolean}>({
+        value:"",
+        error:false
+    })
     const productId: string = params.id !== undefined ? params.id : '';
     //undefined olsa bile bos string olarak tanimliyoruz
 
@@ -27,10 +30,16 @@ export default function CommentSection(){
     },[data])
 
     const submitComment = ()=>{
+        
+       if(!commentMessage.value.length){
+          setCommentMessage(prev=>({...prev,error:true}))
+          return;
+       }
+
        createComment({
             variables:{
                 productId:parseInt(productId),
-                message:commentMessage,
+                message:commentMessage.value,
                 star:selectedStar,
             }
         })       
@@ -41,12 +50,12 @@ export default function CommentSection(){
             <div className="max-w-7xl m-auto" >
                 <div className="flex">
                    <div className="mr-5 border-solid border-2 border-white rounded-full w-16 h-16">
-                      <img className="rounded-full object-cover" src="/bubble.png" alt="" />
+                      <img className="rounded-full object-cover" src="/user.jpg" alt="" />
                    </div>
                    <div className="relative">
-                     <TextField value={commentMessage} onChange={(e)=>setCommentMessage(e.target.value)} multiline className="w-96" label={"Write a review..."} rows={4} variant="outlined"></TextField>
+                     <TextField error={commentMessage.error} helperText={commentMessage.error ? "You need to write something !" : ""} value={commentMessage.value} onChange={(e)=>setCommentMessage(prev=>({...prev,value:e.target.value}))} multiline className="w-96" label={"Write a review..."} rows={4} variant="outlined"></TextField>
                      <div className="absolute right-0 -bottom-12 z-50">
-                        <Button onClick={submitComment} variant="outlined" style={{textTransform:"capitalize"}} >share</Button>
+                        <Button  onClick={submitComment} variant="outlined" style={{textTransform:"capitalize"}} >share</Button>
                      </div>
                      <div className="w-64 absolute">
                         {[0,0,0,0,0].map((item,index)=>(

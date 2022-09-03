@@ -2,6 +2,8 @@ const {gql} = require("apollo-server-express")
 
 
 const typeDefs = gql`
+  scalar Date
+
   type Count{
       count:Int!   
   }
@@ -25,6 +27,7 @@ const typeDefs = gql`
     id:Int!
     message:String!
     star:Int!
+    createdAt:Date!
   }
   
   type User {

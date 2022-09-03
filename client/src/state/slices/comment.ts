@@ -3,7 +3,8 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit"
 interface CommentType{
     id:number,
     message:string,
-    star:number
+    star:number,
+    createdAt:string
 }
 
 const initialState : CommentType[] = []

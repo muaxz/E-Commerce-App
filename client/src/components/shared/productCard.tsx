@@ -36,7 +36,7 @@ export default function ProductCard(props:Props){
 
     const sessionId = localStorage.getItem("sessionId")
     
-    var iconStyling = props.actionButton === "Delete" ? "flex bottom-10 right-16 w-8 h-8" : "hidden  w-16 h-16 top-16 right-24 top-40 right-24";
+    var iconStyling = props.actionButton === "Delete" ? "flex bottom-10 right-16 w-8 h-8" : "hidden  w-16 h-16 top-16 right-24  right-24";
     var icondDirectionStyling = props.actionButton === "Delete" ? "flex bottom-10 right-28 w-8 h-8" : "hidden  w-16 h-16  right-24 top-40 right-24";
     useEffect(()=>{
 

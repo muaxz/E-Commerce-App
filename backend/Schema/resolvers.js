@@ -6,7 +6,17 @@ const Category = require("../Models/category")
 const db = require("../DataBase/connection")
 const {Op} = require("sequelize")
 const {v4} = require("uuid")
+const {GraphQLScalarType} = require("graphql")
 
+
+
+const GraphQLDateType = new GraphQLScalarType({
+    name:"Date",
+    description:"valid",
+    serialize:(value)=>value,
+    parseValue:(value)=>value,
+    parseLiteral:(ast)=>ast.value
+}) 
 
 const resolvers = {
     Query : {
@@ -183,7 +193,8 @@ const resolvers = {
           
         },
 
-    }
+    },
+    Date:GraphQLDateType
 }
 
 

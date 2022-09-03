@@ -33,6 +33,7 @@ export const produceComment = gql`
             id
             message
             star
+            createdAt
         }
     }
 `

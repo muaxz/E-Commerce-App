@@ -47,8 +47,8 @@ function Home(){
                      refetch({categoryId:90,offset:currentProductsCount.current})
                      setPaignationLoading(false)
                      isPaignation.current = true;
-                     allowPaignation.current = false
                   },1000);
+                  allowPaignation.current = false
                }
            })
         }

@@ -50,6 +50,7 @@ export const getSingleProduct = gql`
                 id
                 message
                 star
+                createdAt
             }
          }
     }
