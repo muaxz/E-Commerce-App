@@ -1,7 +1,7 @@
 const {Sequelize} = require("sequelize")
 
 
-const sequelizeBase = new Sequelize("e-commerce","root","2231223122aA",{host:"localhost",dialect:"mysql"})
+const sequelizeBase = new Sequelize("heroku_b90041b976bbb35","bee24fb0efc68b","8468f771",{host:"us-cdbr-east-06.cleardb.net",dialect:"mysql"})
 
 sequelizeBase.authenticate().then(()=>console.log("connected!"))
 
