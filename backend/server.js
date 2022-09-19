@@ -12,7 +12,7 @@ const Comment = require("./Models/comment")
 const CategoryModel = require("./Models/category")
 const cors = require("cors")
 const path = require("path")
-const port = 3001
+const port = process.env.PORT || 3001
 
 app.use(cors({origin:"http://localhost:3000"}))
 DB.sync().then(()=>{
