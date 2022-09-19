@@ -14,7 +14,8 @@ const UserProduct = sequelize.define("userProduct",{
         type:Sequelize.INTEGER
     },
     quantity:{
-        type:Sequelize.INTEGER
+        type:Sequelize.INTEGER,
+        defaultValue:1,
     }
 },{freezeTableName:true})
 
