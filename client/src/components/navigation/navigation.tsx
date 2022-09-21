@@ -25,6 +25,7 @@ function NavigationBar(){
 
   const searchHandler = (e : React.FormEvent<HTMLInputElement>)=>{
      setSearchValue(e.currentTarget.value)
+     if(searchValue.trim() !== "")
      refetch({searchValue:searchValue})
   }
 
