@@ -24,6 +24,7 @@ export default function ProductList(props:Props){
         <div  className="flex w-full p-10 flex-wrap  max-w-7xl m-auto">
           {!props.loading && props.list.map((item,index)=>
           (<ProductCard
+            key={index}
             product={{id:item.id,name:item.name,price:item.price,starPoint:item.starPoint,url:item.url,quantity:item.userProduct == undefined ? 0 : item.userProduct.quantity}}
             actionButton={props.buttonAction}
             index={index}

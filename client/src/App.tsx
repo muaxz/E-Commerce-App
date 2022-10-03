@@ -8,6 +8,8 @@ import './App.css';
 import {ApolloClient,ApolloProvider,InMemoryCache,HttpLink,from, DefaultOptions} from "@apollo/client"
 import {onError} from "@apollo/client/link/error"
 
+
+
 const errorLink = onError(({graphQLErrors,networkError})=>{
     if(graphQLErrors){
       console.log("error")

@@ -36,8 +36,8 @@ export default function ProductCard(props:Props){
 
     const sessionId = localStorage.getItem("sessionId")
     
-    var iconStyling = props.actionButton === "Delete" ? "flex bottom-10 right-16 w-8 h-8" : "hidden  w-16 h-16 top-16 right-24  right-24";
-    var icondDirectionStyling = props.actionButton === "Delete" ? "flex bottom-10 right-28 w-8 h-8" : "hidden  w-16 h-16  right-24 top-40 right-24";
+    var iconStyling = props.actionButton === "Delete" ? "flex bottom-5 right-14 w-8 h-8" : "hidden  w-16 h-16 top-16 right-24  right-24";
+    var icondDirectionStyling = props.actionButton === "Delete" ? "flex bottom-5 right-24 w-8 h-8" : "hidden  w-16 h-16  right-24 top-40 right-24";
     useEffect(()=>{
 
         if(productQuantity !== 0 && props.actionButton === "Delete"){
@@ -93,7 +93,7 @@ export default function ProductCard(props:Props){
   
     return(
         <div className="flex w-100  flex-wrap justify-center z-10 relative">
-                <div className="w-64 mr-10 mb-10 max-w-sm bg-white rounded-lg border relative border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                <div className="w-64 mr-10 mb-10 max-w-sm bg-white rounded-lg border relative border-gray-200 shadow-md ">
                     <div className='group'>
                         <div className={`absolute  duration-200 ${props.actionButton === "Delete" ? "hidden" : "block"} group-hover:opacity-70 w-full h-full z-10 bg-slate-700 opacity-0`}></div>
                         <div onClick={submitToCart} className={`cursor-pointer ${iconStyling} group-hover:flex  rounded absolute  z-20 bg-red-400 flex justify-center items-center`}>
@@ -112,7 +112,7 @@ export default function ProductCard(props:Props){
                             <img className='rounded w-full object-cover h-44' src={props.product.url}></img>
                         </div>
                         <a href="#">
-                            <h5 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{props.product.name}</h5>
+                            <h5 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 ">{props.product.name}</h5>
                             <p>{props.product.detail}</p>
                         </a>
                         {
@@ -129,7 +129,7 @@ export default function ProductCard(props:Props){
                         }
                         <div>
                             {[0,0,0,0,0].map((item,index)=>(
-                                <FontAwesomeIcon color={index+1 <= props.product.starPoint ? '#e76f51' : "white"} icon={faStar}></FontAwesomeIcon>
+                                <FontAwesomeIcon key={index} color={index+1 <= props.product.starPoint ? '#e76f51' : "white"} icon={faStar}></FontAwesomeIcon>
                             ))}
                         </div>
                         <p className="font-normal text-gray-700 dark:text-gray-400">{props.product.price}$</p>

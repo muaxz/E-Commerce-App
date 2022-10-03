@@ -21,7 +21,7 @@ function Slick(){
           <h2 className='text-xl p-5 text-center'> <span className="text-slate-50 rounded-md text-black">Trend Products</span></h2>
           <Slider {...settings}>
             {
-                cardContents.current.map((item,index)=>(<ProductCard  index={index} actionButton={"Add To Cart"} product={{starPoint:5,price:item.price,name:item.name,url:item.image,id:item.id,detail:item.detail}}/>))
+                cardContents.current.map((item,index)=>(<ProductCard  key={index}  index={index} actionButton={"Add To Cart"} product={{starPoint:5,price:item.price,name:item.name,url:item.image,id:item.id,detail:item.detail}}/>))
             }
           </Slider>
         </div>
