@@ -65,7 +65,7 @@ DB.sync().then(()=>{
 
 async function startApolloServer(){
 
-  const apolloServer =  new ApolloServer({typeDefs,resolvers,csrfPrevention:true,context:({req,res})=>{return{req:req,res}}})
+  const apolloServer =  new ApolloServer({typeDefs,resolvers,csrfPrevention:true,persistedQueries:false,context:({req,res})=>{return{req:req,res}}})
 
   await apolloServer.start()
 
